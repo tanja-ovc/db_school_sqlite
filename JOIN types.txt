@@ -1,0 +1,80 @@
+________________
+--(INNER) JOIN--
+________________
+
+SELECT *
+FROM movies
+JOIN slogans ON movies.slogan_id = slogans.id;
+
+SELECT movies.name,
+       slogans.name,
+       types.name
+FROM movies
+JOIN slogans ON movies.slogan_id = slogans.id
+JOIN types ON movies.type_id = types.id;
+
+_____________________
+--LEFT (OUTER) JOIN--
+_____________________
+
+SELECT movies.name,
+       slogans.name
+FROM movies
+LEFT JOIN slogans ON movies.slogan_id = slogans.id;
+
+______________________
+--RIGHT (OUTER) JOIN--
+______________________
+
+SELECT movies.name,
+       types.name
+FROM movies
+RIGHT JOIN types ON movies.type_id = types.id;
+
+(not supported in SQLite)
+Version for SQLite (just swap tables):
+
+SELECT movies.name,
+       types.name
+FROM types
+LEFT JOIN movies ON movies.type_id = types.id;
+
+_____________________
+--FULL (OUTER) JOIN--
+_____________________
+
+SELECT movies.name,
+       slogans.name
+FROM movies
+FULL JOIN slogans ON movies.slogan_id = slogans.id;
+
+(not supported in SQLite)
+Version for SQLite
+(equals to LEFT JOIN + RIGHT JOIN (SQLite style) + unification):
+
+SELECT movies.name,
+       slogans.name
+FROM movies
+LEFT JOIN slogans ON movies.slogan_id = slogans.id
+UNION
+SELECT movies.name,
+       slogans.name
+FROM slogans
+LEFT JOIN movies ON movies.slogan_id = slogans.id;
+
+______________
+--CROSS JOIN--
+______________
+
+SELECT movies.name,
+       slogans.name
+FROM movies
+CROSS JOIN slogans;
+
+Безумные Мелодии Луни Тюнз|For Three Men The Civil War Wasn't Hell. It Was Practice!
+Безумные Мелодии Луни Тюнз|This isn't the movies anymore
+Безумные Мелодии Луни Тюнз|Tonight on Murder She Wrote
+Безумные Мелодии Луни Тюнз|I'll be back
+Весёлые мелодии|For Three Men The Civil War Wasn't Hell. It Was Practice!
+Весёлые мелодии|This isn't the movies anymore
+...
